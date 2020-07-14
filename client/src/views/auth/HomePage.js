@@ -22,16 +22,23 @@ class HomePage extends React.Component {
 		var currentUser = this.props.currentUser;
 		console.log(currentUser, "currentUser in Homepage");
 		return (
+			//if currentUser is there
+			//show quizzes and createQuiz button
+			//if quiz is there show quizzes or null
+
+			//if currentUser is null
+			//show Welcome screen
+
 			<>
-				{this.props.quizzes && this.props.quizzes.length ? (
-					<div className="container mt-6">
-						{currentUser ? (
-							<>
-								<div>
-									<Link to={`/quiz/new`} className="btn btn-success mb-3">
-										Create Quiz
-									</Link>
-								</div>
+				{currentUser ? (
+					<>
+						<div className="container mt-6">
+							<div>
+								<Link to={`/quiz/new`} className="btn btn-success mb-3">
+									Create Quiz
+								</Link>
+							</div>
+							{this.props.quizzes && this.props.quizzes.length ? (
 								<div className="row ">
 									{this.props.quizzes.map((quiz, i) => {
 										return (
@@ -80,20 +87,20 @@ class HomePage extends React.Component {
 										);
 									})}
 								</div>
-							</>
-						) : (
-							<div className="d-flex flex-column">
-								<center>
-									<h1>Welcome to QuizTick</h1>
-									<p>
-										Please <Link to="/login">Login</Link> to continue.
-									</p>
-								</center>
-							</div>
-						)}
-					</div>
+							) : (
+								<h1>No quizzes, yet</h1>
+							)}
+						</div>
+					</>
 				) : (
-					<h1>Loading</h1>
+					<div className="d-flex flex-column">
+						<center>
+							<h1>Welcome to QuizTick</h1>
+							<p>
+								Please <Link to="/login">Login</Link> to continue.
+							</p>
+						</center>
+					</div>
 				)}
 			</>
 		);
