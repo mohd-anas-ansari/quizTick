@@ -22,7 +22,6 @@ router.delete("/:id", auth.validateJwt, quizController.deleteQuiz);
 // attempt a quiz
 router.post(
 	"/:id/attempt",
-	auth.allowGuest,
 	auth.validateJwt,
 	quizController.attemptQuiz
 );

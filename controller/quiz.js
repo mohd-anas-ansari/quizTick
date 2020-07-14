@@ -158,19 +158,23 @@ module.exports = {
 				(question) => question.questionId
 			);
 
+			var totalScore = 0;
 			var attemptedQuestions = quiz.questions.map((question, i) => {
 				var index = serializedQuestionIds.indexOf(String(question._id));
+
+				let isCorrect = hasCorrectAnswers(
+					questions[index].answers,
+					question.answers
+				);
+
+				if (isCorrect) {
+					totalScore += 10;
+				}
 
 				return {
 					questionId: question._id,
 					answers: index == -1 ? [] : questions[index].answers,
-					isCorrect:
-						index == -1
-							? false
-							: hasCorrectAnswers(
-									questions[index].answers,
-									question.answers
-							  ),
+					isCorrect: index == -1 ? false : isCorrect,
 				};
 			});
 
@@ -178,9 +182,11 @@ module.exports = {
 				quizId,
 				questions: attemptedQuestions,
 				playerId: req.userId,
+				totalScore: totalScore,
 			});
 
-			res.send({ attempt });
+			return res.send({ attempt });
+
 		} catch (error) {
 			throw error;
 		}

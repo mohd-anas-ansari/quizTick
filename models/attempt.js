@@ -9,9 +9,8 @@ const  attemptSchema = new Schema(
       questionId: { type: Schema.Types.ObjectId, ref: 'Question'},
       answers: [],
       isCorrect: { type: Boolean, default: false },
-      // score: { type: number }
     }],
-    // totalScore: { type: number }
+    totalScore: { type: Number }
   }
   ,
   { timestamps: true }
