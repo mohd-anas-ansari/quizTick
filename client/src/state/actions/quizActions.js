@@ -90,6 +90,22 @@ const deleteQuiz = (id) => {
   };
 };
 
+const attemptQuiz = (attempt) => {
+	return async (dispatch) => {
+		try {
+			var quizResult = await axios.post(
+				`${url}/quiz/${attempt.quizId}/attempt`,
+				attempt
+			);
+
+			dispatch({
+				type: "ATTEMPT_QUIZ",
+				payload: quizResult.data,
+			});
+		} catch (error) {}
+	};
+};
+
 export {
   createQuiz,
   quizList,
@@ -97,4 +113,5 @@ export {
   deleteQuiz,
   updateQuestion,
   addNewQuestion,
+  attemptQuiz
 };
