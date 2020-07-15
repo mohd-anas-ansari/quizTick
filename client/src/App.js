@@ -12,6 +12,7 @@ import Login from "./views/auth/login";
 import Signup from "./views/auth/signup";
 import EditQuiz from "./views/quiz/editQuiz";
 import Profile from "./views/user/Profile";
+import ScoreBoard from "./views/quiz/Scoredboard";
 
 import { identifyUser } from "./state/actions/authActions";
 
@@ -20,6 +21,7 @@ function ProtectedRoutes() {
 		<Switch>
 			<Route exact path="/" component={HomePage} />
 			<Route path="/quiz/new" component={CreateQuiz} />
+			<Route exact path="/score" component={ScoreBoard} />
 			<Route exact path="/quiz/:id" component={AttemptQuiz} />
 			<Route exact path="/quiz/:id/edit" component={EditQuiz} />
 			<Route exact path="/profile" component={Profile} />
