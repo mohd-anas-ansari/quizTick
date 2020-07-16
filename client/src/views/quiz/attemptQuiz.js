@@ -129,6 +129,7 @@ function mapStateToProps({ quiz }) {
 		});
 		return { quiz: { ...quiz.quiz, questions: updatedQuestions } };
 	}
+	return { quiz: null };
 }
 
 export default connect(mapStateToProps)(AttemptQuiz);
