@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import "../../assets/stylesheets/";
 import { connect } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 
 class ScoreBoard extends Component {
 	constructor(props) {
@@ -11,6 +12,8 @@ class ScoreBoard extends Component {
 			player: null,
 		};
 	}
+
+	//I should use componentDidMount here.
 	componentDidUpdate(prevProps) {
 		if (prevProps !== this.props) {
 			var correctedQuestions = this.props.questions.filter(
@@ -33,13 +36,13 @@ class ScoreBoard extends Component {
 							<div className="contact-card__header-image">
 								<div className="contact-card__avatar"></div>
 							</div>
-							<p className="contact-card__name">
+							<div className="contact-card__name">
 								<h4>
 									<span role="img" aria-label="name">
 										📛 {this.state.player}
 									</span>
 								</h4>
-							</p>
+							</div>
 							<ul className="contact-card__footer">
 								<li className="contact-card__footer__link contact-card__footer__link--codepen font-weight-bold">
 									Score: {this.state.correctedQuestions} /{" "}
@@ -47,9 +50,17 @@ class ScoreBoard extends Component {
 								</li>
 							</ul>
 						</div>
+
+						<Link to="/" className="btn btn-primary">
+							Attempt another one.
+						</Link>
 					</div>
 				) : (
-					<div>Loading...</div>
+					<div>
+						<p>
+							Ooops ! Nothing to see here. Take a <Link to="/">Quiz</Link>
+						</p>
+					</div>
 				)}
 			</>
 		);
@@ -60,6 +71,6 @@ function mapStateToProps(state) {
 		var questions = state.quiz.result.attempt.questions;
 		return { questions, player: state.currentUser.userInfo.name };
 	}
+	return { questions: null, player: state.currentUser.userInfo.name };
 }
 export default connect(mapStateToProps)(ScoreBoard);
-
